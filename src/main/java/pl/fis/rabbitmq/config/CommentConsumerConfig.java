@@ -9,8 +9,8 @@ import java.util.function.Consumer;
 @Configuration
 @Slf4j
 public class CommentConsumerConfig {
-    @Bean
-    public Consumer<String> commentConsumer() {
-        return (msg) -> log.info("Received message: {}", msg);
-    }
+//    @Bean
+//    public Consumer<String> commentConsumer() {
+//        return (msg) -> log.info("Comment consumer: Received message: {}", msg);
+//    }
 }

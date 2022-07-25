@@ -9,8 +9,8 @@ import java.util.function.Consumer;
 @Configuration
 @Slf4j
 public class UserConsumerConfig {
-    @Bean
-    public Consumer<String> userConsumer() {
-        return (msg) -> log.info("Received message: {}", msg);
-    }
+//    @Bean
+//    public Consumer<String> userConsumer() {
+//        return (msg) -> log.info("User consumer: Received message: {}", msg);
+//    }
 }

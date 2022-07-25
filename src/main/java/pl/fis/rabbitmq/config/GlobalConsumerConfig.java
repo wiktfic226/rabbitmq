@@ -8,9 +8,9 @@ import java.util.function.Consumer;
 
 @Configuration
 @Slf4j
-public class ArticleConsumerConfig {
-//    @Bean
-//    public Consumer<String> articleConsumer() {
-//        return (msg) -> log.info("Article consumer: Received message: {}", msg);
-//    }
+public class GlobalConsumerConfig {
+    @Bean
+    public Consumer<String> consumer() {
+        return (msg) -> log.info("Received message: {}", msg);
+    }
 }
