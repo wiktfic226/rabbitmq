@@ -1,6 +1,7 @@
 package pl.fis.rabbitmq.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -12,16 +13,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class ArticleController {
 
-    private final StreamBridge streamBridge;
+    private final AmqpTemplate amqpTemplate;
     @PostMapping
     public String createArticle() {
-        streamBridge.send("article-out-0", "ARTICLE_CREATED");
+        amqpTemplate.convertAndSend("article.topic.exchange", "article.example.*", "ARTICLE_CREATED");
         return "Article created!";
     }
 
     @PutMapping
     public String updateArticle() {
-        streamBridge.send("article-out-0", "ARTICLE_UPDATED");
+        amqpTemplate.convertAndSend("article.topic.exchange", "article.example.articleQueue", "ARTICLE_UPDATED");
         return "Article updated!";
     }
 }

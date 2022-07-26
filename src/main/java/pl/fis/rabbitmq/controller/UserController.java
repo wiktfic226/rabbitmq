@@ -1,7 +1,7 @@
 package pl.fis.rabbitmq.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.cloud.stream.function.StreamBridge;
+import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class UserController {
 
-    private final StreamBridge streamBridge;
+    private final AmqpTemplate amqpTemplate;
 
     @PostMapping
     public String createUser() {
-        streamBridge.send("user-out-0", "USER_CREATED");
+        amqpTemplate.convertAndSend("user.topic.exchange", "user.example.userQueue", "USER_CREATED");
         return "User created!";
     }
 }

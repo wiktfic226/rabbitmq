@@ -1,6 +1,7 @@
 package pl.fis.rabbitmq.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,23 +10,23 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class CommentController {
 
-    private final StreamBridge streamBridge;
+    private final AmqpTemplate amqpTemplate;
 
     @PostMapping
     public String createComment() {
-        streamBridge.send("comment-out-0", "COMMENT_CREATED");
+        amqpTemplate.convertAndSend("comment.topic.exchange", "comment.example.commentQueue", "COMMENT_CREATED");
         return "Comment created!";
     }
 
     @PutMapping
     public String updateComment() {
-        streamBridge.send("comment-out-0", "COMMENT_UPDATED");
+        amqpTemplate.convertAndSend("comment.topic.exchange", "comment.example.commentQueue2", "COMMENT_UPDATED");
         return "Comment updated!";
     }
 
     @DeleteMapping
     public String deleteComment() {
-        streamBridge.send("comment-out-0", "COMMENT_DELETED");
+        amqpTemplate.convertAndSend("comment.topic.exchange", "comment.example.commentQueue", "COMMENT_DELETED");
         return "Comment deleted!";
     }
 }
