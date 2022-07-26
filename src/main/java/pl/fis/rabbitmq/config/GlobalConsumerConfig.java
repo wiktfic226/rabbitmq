@@ -10,7 +10,17 @@ import java.util.function.Consumer;
 @Slf4j
 public class GlobalConsumerConfig {
     @Bean
-    public Consumer<String> consumer() {
-        return (msg) -> log.info("Received message: {}", msg);
+    public Consumer<String> createdConsumer() {
+        return (msg) -> log.info("CREATED - Received message: {}", msg);
+    }
+
+    @Bean
+    public Consumer<String> updatedConsumer() {
+        return (msg) -> log.info("UPDATED - Received message: {}", msg);
+    }
+
+    @Bean
+    public Consumer<String> deletedConsumer() {
+        return (msg) -> log.info("DELETED - Received message: {}", msg);
     }
 }

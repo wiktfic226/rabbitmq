@@ -15,13 +15,13 @@ public class ArticleController {
     private final StreamBridge streamBridge;
     @PostMapping
     public String createArticle() {
-        streamBridge.send("article-out-0", "ARTICLE_CREATED");
+        streamBridge.send("articleCreated-out-0", "ARTICLE_CREATED");
         return "Article created!";
     }
 
     @PutMapping
     public String updateArticle() {
-        streamBridge.send("article-out-0", "ARTICLE_UPDATED");
+        streamBridge.send("articleUpdated-out-0", "ARTICLE_UPDATED");
         return "Article updated!";
     }
 }
