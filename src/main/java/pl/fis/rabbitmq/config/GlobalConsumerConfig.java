@@ -23,4 +23,9 @@ public class GlobalConsumerConfig {
     public Consumer<String> deletedConsumer() {
         return (msg) -> log.info("DELETED - Received message: {}", msg);
     }
+
+    @Bean
+    public Consumer<String> modelConsumer() {
+        return (msg) -> log.info("Received message: {}", msg);
+    }
 }
